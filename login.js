@@ -77,7 +77,7 @@ function BTCTransfer(res,ToAddress,Amount,FromAddress){
 
 if (module === require.main) {
     // Start the server
-    var server = app.listen(process.env.PORT || 8085, function () {
+    var server = app.listen(process.env.PORT || 8080, function () {
         var port = server.address().port;
         console.log('App listening on port %s', port);
     });
