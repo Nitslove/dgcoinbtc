@@ -4,6 +4,14 @@
  *
  * Contact support@block.io if you have any issues
  */
+
+var express = require('express');
+var app = express();
+var task_code = '';
+var ToAddress = '';
+var FromAddress = '';
+var Value = '';
+
 var BlockIo = require('block_io');
 
 // PIN IS NOT NEEDED!!!
