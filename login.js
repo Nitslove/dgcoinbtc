@@ -10,7 +10,7 @@ var app = express();
 var task_code = '';
 var ToAddress = '';
 var FromAddress = '';
-var Value = '';
+var Amount = '';
 
 var BlockIo = require('block_io');
 
