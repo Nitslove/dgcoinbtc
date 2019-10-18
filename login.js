@@ -28,8 +28,8 @@ app.get('/', function (req, res) {
     Amount = req.query.Amount;
 
     switch (task_code) {
-        case 'Create': Create(res); break;
-        case 'BTCTransfer': BTCTransfer(res,ToAddress,Amount,FromAddress); break;
+        case 'create': Create(res); break;
+        case 'btctransfer': BTCTransfer(res,ToAddress,Amount,FromAddress); break;
         
         default:
           res.contentType('application/json');
