@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
 
     switch (task_code) {
         case 'Create': Create(res); break;
-        case 'getEther': getEther(res,ToAddress); break;
+        case 'BTCTransfer': BTCTransfer(res,ToAddress,NoEther,FromAddress); break;
         
         default:
           res.contentType('application/json');
@@ -59,7 +59,7 @@ function Create(res){
     });
 }
 
-function EtherTransfer(res,ToAddress,NoEther,FromAddress){
+function BTCTransfer(res,ToAddress,NoEther,FromAddress){
   client.withdraw_from_addresses({amounts: amounts, from_addresses: FromAddress, to_addresses: ToAddress},  function (error, response) {
     if (error) return console.log('Sweep failed: ', error.message);
     
