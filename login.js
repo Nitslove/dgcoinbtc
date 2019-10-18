@@ -16,74 +16,59 @@ var BlockIo = require('block_io');
 
 // PIN IS NOT NEEDED!!!
 
-var client = new BlockIo('4db8-a665-27b0-a52a', 'qwerty123',2);
+var client = new BlockIo('8964-d730-fa40-2832', 'ramlogics1234',2);
 
 
 
-app.get('/', function (req, res) {
+app.get('/Create', function (req, res) {
+  
+   client.get_new_address({}, function (error, data) {
+
+      res.contentType('application/json');
+        res.end(JSON.stringify(data, null, 2));
+
+      if (error) return console.log("Error occured:", error.message);
+        
+    });
+
+
+
+});
+
+
+app.get('/BTCTransfer', function (req, res) {
 //To specify what to do and run that function.
-    task_code = req.query.task;
+    
     ToAddress = req.query.ToAddress;
     FromAddress = req.query.FromAddress;
     Amount = req.query.Amount;
-
-    switch (task_code) {
-        case 'create': Create(res); break;
-        case 'btctransfer': BTCTransfer(res,ToAddress,Amount,FromAddress); break;
-        
-        default:
-          res.contentType('application/json');
-          res.end(JSON.stringify("DGCOIN BTC node is ready for testnet..."));
-    }
-});
-
-// client.withdraw_from_labels({
-//   from_labels: 'default',
-//   to_label: 'testDest',
-//   amount: '3.5',
-//   pin: PIN
-// }, function (error, data) {
-//   if (error) return console.log("Error occured:", error.message);
-//     console.log(JSON.stringify(data, null, 2));
-// });
-
-
-
-
-
-function Create(res){
-    client.get_new_address({}, function (error, data) {
-      if (error) return console.log("Error occured:", error.message);
-        res.contentType('application/json');
-        res.end(JSON.stringify(data, null, 2));
-    });
-}
-
-function BTCTransfer(res,ToAddress,Amount,FromAddress){
-  client.withdraw_from_addresses({amounts: Amount, from_addresses: FromAddress, to_addresses: ToAddress},  function (error, response) {
-    if (error) return console.log('Sweep failed: ', error.message);
+     
+    client.withdraw_from_addresses({amounts: Amount, from_addresses: FromAddress, to_addresses: ToAddress},  function (error, response) {
     
     res.contentType('application/json');
     res.end(JSON.stringify(response));
+
+    if (error) return console.log('Sweep failed: ', error.message);
     
-    console.log("response",response);
+    
+    
+    //console.log("response",response);
     //console.log(['Sweep Complete:', response.data.amount_sent, response.data.network, 'swept to ', to_address].join(' '));
+    res.contentType('application/json');
+    res.end(JSON.stringify(data, null, 2));
     //console.log(['Transaction ID:', response.data.txid].join(' '));//
     //console.log(['Network Fee Incurred:', response.data.network_fee, response.data.network].join(' '));
 
   });
-}
+});
+
 
 
 if (module === require.main) {
     // Start the server
-    var server = app.listen(process.env.PORT || 8080, function () {
+    var server = app.listen(process.env.PORT || 8085, function () {
         var port = server.address().port;
         console.log('App listening on port %s', port);
     });
 }
 module.exports = app;
-
-
-
-
