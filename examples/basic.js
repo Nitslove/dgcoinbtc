@@ -1,12 +1,11 @@
 // creates a new destination address, withdraws from the default label to it, gets sent transactions, and the current price
 var BlockIo = require('block_io');
 
-
+var PIN = 'YOURSECRETPIN';
 
 // please use the Dogecoin Testnet API key here
 var client = new BlockIo({
-  api_key: '4db8-a665-27b0-a52a',
-  PIN = 'qwerty123',
+  api_key: 'YOURDOGECOINTESTNETAPIKEY',
   version: 2
 });
 
@@ -51,3 +50,5 @@ client.get_current_price({
   if (error) return console.log("Error occured:", error.message);
     console.log(JSON.stringify(data, null, 2));
 });
+
+
